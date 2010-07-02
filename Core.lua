@@ -261,7 +261,7 @@ end
 function frame:ADDON_LOADED(_, addon)
 	if addon:lower() ~= "ezfishing" then return end
 	self:UnregisterEvent('ADDON_LOADED')
-	if LibStub and LibStub("AceDB-3.0") and LibStub("AceConfigDialog-3.0") then
+	if LibStub and LibStub("AceDB-3.0", true) and LibStub("AceConfigDialog-3.0", true) then
 		db = LibStub('AceDB-3.0'):New('ezFishingDB', defaults, true)
 		LibStub("AceConfig-3.0"):RegisterOptionsTable('ezFishing', GetOptions)
 		LibStub("AceConfigDialog-3.0"):AddToBlizOptions('ezFishing', 'ezFishing')

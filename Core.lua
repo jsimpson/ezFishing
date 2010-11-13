@@ -28,30 +28,30 @@ local cvarOverrides = {
 }
 
 local poles = {
-  [ 6256] = true, -- Fishing Pole
-  [ 6365] = true, -- Strong Fishing Pole
-  [ 6366] = true, -- Darkwood Fishing Pole
-  [ 6367] = true, -- Big Iron Fishing Pole',quality:1,icon:'INV_Fishingpole_01'};_
-  [12225] = true, -- Blump Family Fishing Pole
-  [19022] = true, -- Nat Pagle's Extreme Angler FC-5000
-	[19970] = true, -- Arcanite Fishing Pole
-  [25978] = true, -- Seth's Graphite Fishing Pole
-	[44050] = true, -- Mastercraft Kalu'ak Fishing Pole
-  [45858] = true, -- Nat's Lucky Fishing Pole
-	[45991] = true, -- Bone Fishing Pole
-  [45992] = true, -- Jeweled Fishing Pole
+    [ 6256] = true, -- Fishing Pole
+    [ 6365] = true, -- Strong Fishing Pole
+    [ 6366] = true, -- Darkwood Fishing Pole
+    [ 6367] = true, -- Big Iron Fishing Pole',quality:1,icon:'INV_Fishingpole_01'};_
+    [12225] = true, -- Blump Family Fishing Pole
+    [19022] = true, -- Nat Pagle's Extreme Angler FC-5000
+    [19970] = true, -- Arcanite Fishing Pole
+    [25978] = true, -- Seth's Graphite Fishing Pole
+    [44050] = true, -- Mastercraft Kalu'ak Fishing Pole
+    [45858] = true, -- Nat's Lucky Fishing Pole
+    [45991] = true, -- Bone Fishing Pole
+    [45992] = true, -- Jeweled Fishing Pole
 }
 
 local lures = {
-	-- [Item Id] = { required skill, bonus, duration(m) }
-	[ 6529] = {   0,  25, 10 }, -- Shiny Bauble
-	[ 6530] = {  50,  50, 10 }, -- Nightcrawlers
-	[ 6532] = { 100,  75, 10 }, -- Bright Baubles
-	[ 6533] = { 100, 100, 10 }, -- Aquadynamic Fish Attractor
-	[ 6811] = {  50,  50, 10 }, -- Aquadynamic Fish Lens
-	[ 7307] = { 100,  75, 10 }, -- Flesh Eating Worm
-	[34861] = { 100, 100, 10 }, -- Sharpened Fish Hook
-	[46006] = { 100, 100, 60 }, -- Glow Worm
+    -- [Item Id] = { required skill, bonus, duration(m) }
+    [ 6529] = {   0,  25, 10 }, -- Shiny Bauble
+    [ 6530] = {  50,  50, 10 }, -- Nightcrawlers
+    [ 6532] = { 100,  75, 10 }, -- Bright Baubles
+    [ 6533] = { 100, 100, 10 }, -- Aquadynamic Fish Attractor
+    [ 6811] = {  50,  50, 10 }, -- Aquadynamic Fish Lens
+    [ 7307] = { 100,  75, 10 }, -- Flesh Eating Worm
+    [34861] = { 100, 100, 10 }, -- Sharpened Fish Hook
+    [46006] = { 100, 100, 60 }, -- Glow Worm
 }
 
 local db
@@ -60,14 +60,16 @@ local db
 -- Lure handling
 --------------------------------------------------------------------------------
 
+--[[ GetNumSkillLines() and GetSkillLineInfo() both REMOVED in Patch 4.0.1 ]]
 local function GetFishingSkill()
-	for i = 1, GetNumSkillLines() do
-		local name, _, _, rank, _, modifier = GetSkillLineInfo(i)
-		if name == fishingSkill then
-			return rank + modifier
-		end
-	end
-	return 0
+    local _, _, _, fishing, _, _ = GetProfessions();
+    local name, _, rank, _, _, _, _, modifier = GetProfessionInfo(fishing)
+    if (not modifier) then
+        return rank
+    else
+        return rank + modifier
+    end
+    return 0
 end
 
 local function GetBestLure()

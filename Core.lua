@@ -31,7 +31,7 @@ local poles = {
     [ 6256] = true, -- Fishing Pole
     [ 6365] = true, -- Strong Fishing Pole
     [ 6366] = true, -- Darkwood Fishing Pole
-    [ 6367] = true, -- Big Iron Fishing Pole',quality:1,icon:'INV_Fishingpole_01'};_
+    [ 6367] = true, -- Big Iron Fishing Pole
     [12225] = true, -- Blump Family Fishing Pole
     [19022] = true, -- Nat Pagle's Extreme Angler FC-5000
     [19970] = true, -- Arcanite Fishing Pole
@@ -50,6 +50,7 @@ local lures = {
     [ 6533] = { 100, 100, 10 }, -- Aquadynamic Fish Attractor
     [ 6811] = {  50,  50, 10 }, -- Aquadynamic Fish Lens
     [ 7307] = { 100,  75, 10 }, -- Flesh Eating Worm
+    [33820] = {   0,  75, 10 }, -- Weather-Beaten Fishing Hat
     [34861] = { 100, 100, 10 }, -- Sharpened Fish Hook
     [46006] = { 100, 100, 60 }, -- Glow Worm
 }
@@ -236,9 +237,19 @@ function GetOptions()
 				},
 			}
 		}
-	end	
+	end
 	return options
 end	
+
+--------------------------------------------------------------------------------
+-- Slash commands
+--------------------------------------------------------------------------------
+
+SlashCmdList["EZFISHING"] = function()
+    InterfaceOptionsFrame_OpenToCategory("ezFishing")
+end
+SLASH_EZFISHING1 = "/ezfishing"
+SLASH_EZFISHING2 = "/ezfish"
 
 --------------------------------------------------------------------------------
 -- Event handling
@@ -283,4 +294,3 @@ frame:RegisterEvent('PLAYER_REGEN_DISABLED')
 frame:RegisterEvent('PLAYER_REGEN_ENABLED')
 frame:RegisterEvent('UNIT_INVENTORY_CHANGED')
 frame:RegisterEvent('ADDON_LOADED')
-

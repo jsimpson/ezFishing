@@ -60,7 +60,6 @@ local db
 -- Lure handling
 --------------------------------------------------------------------------------
 
---[[ GetNumSkillLines() and GetSkillLineInfo() both REMOVED in Patch 4.0.1 ]]
 local function GetFishingSkill()
     local _, _, _, fishing, _, _ = GetProfessions()
     local name, _, rank, _, _, _, _, modifier = GetProfessionInfo(fishing)
@@ -99,7 +98,7 @@ frame:Hide()
 -- Core
 --------------------------------------------------------------------------------
 
-local button = CreateFrame("CheckButton", "ezFishingButton", UIParent, "SecureActionButtonTemplate")
+local button = CreateFrame("Button", "ezFishingButton", UIParent, "SecureActionButtonTemplate")
 button:EnableMouse(true)
 button:SetFrameStrata("LOW")
 button:RegisterForClicks("RightButtonUp")

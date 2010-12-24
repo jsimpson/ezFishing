@@ -201,7 +201,7 @@ end
 --------------------------------------------------------------------------------
 
 local options
-function GetOptions()
+local function GetOptions()
 	if not options then	
 		options = {
 			name = 'ezFishing',

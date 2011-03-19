@@ -11,4 +11,3 @@
 ## SavedVariables: ezFishingDB
 
 Core.lua
-

@@ -40,6 +40,8 @@ local poles = {
     [45858] = true, -- Nat's Lucky Fishing Pole
     [45991] = true, -- Bone Fishing Pole
     [45992] = true, -- Jeweled Fishing Pole
+    [46337] = true, -- Staats' Fishing Pole
+    --[52678] = true, -- Jonathan's Fishing Pole (Not avilable in game?)
 }
 
 local lures = {
@@ -53,6 +55,8 @@ local lures = {
     [33820] = {   0,  75, 10 }, -- Weather-Beaten Fishing Hat
     [34861] = { 100, 100, 10 }, -- Sharpened Fish Hook
     [46006] = { 100, 100, 60 }, -- Glow Worm
+    [62673] = { 100, 100, 10 }, -- Feathered Lure
+    [68049] = { 250, 150, 15 }, -- Heat-Treated Spinning Lure
 }
 
 local db

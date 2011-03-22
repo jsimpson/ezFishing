@@ -41,7 +41,7 @@ local poles = {
     [45991] = true, -- Bone Fishing Pole
     [45992] = true, -- Jeweled Fishing Pole
     [46337] = true, -- Staats' Fishing Pole
-    --[52678] = true, -- Jonathan's Fishing Pole (Not avilable in game?)
+    [52678] = true, -- Jonathan's Fishing Pole (Not avilable in game?)
 }
 
 local lures = {

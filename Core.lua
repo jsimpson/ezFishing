@@ -28,35 +28,47 @@ local cvarOverrides = {
 }
 
 local poles = {
-    [ 6256] = true, -- Fishing Pole
-    [ 6365] = true, -- Strong Fishing Pole
-    [ 6366] = true, -- Darkwood Fishing Pole
-    [ 6367] = true, -- Big Iron Fishing Pole
-    [12225] = true, -- Blump Family Fishing Pole
-    [19022] = true, -- Nat Pagle's Extreme Angler FC-5000
-    [19970] = true, -- Arcanite Fishing Pole
-    [25978] = true, -- Seth's Graphite Fishing Pole
-    [44050] = true, -- Mastercraft Kalu'ak Fishing Pole
-    [45858] = true, -- Nat's Lucky Fishing Pole
-    [45991] = true, -- Bone Fishing Pole
-    [45992] = true, -- Jeweled Fishing Pole
-    [46337] = true, -- Staats' Fishing Pole
-    [52678] = true, -- Jonathan's Fishing Pole (Not avilable in game?)
+    [  6256] = true, -- Fishing Pole
+    [  6365] = true, -- Strong Fishing Pole
+    [  6366] = true, -- Darkwood Fishing Pole
+    [  6367] = true, -- Big Iron Fishing Pole
+    [ 12225] = true, -- Blump Family Fishing Pole
+    [ 19022] = true, -- Nat Pagle's Extreme Angler FC-5000
+    [ 19970] = true, -- Arcanite Fishing Pole
+    [ 25978] = true, -- Seth's Graphite Fishing Pole
+    [ 44050] = true, -- Mastercraft Kalu'ak Fishing Pole
+    [ 45858] = true, -- Nat's Lucky Fishing Pole
+    [ 45991] = true, -- Bone Fishing Pole
+    [ 45992] = true, -- Jeweled Fishing Pole
+    [ 46337] = true, -- Staats' Fishing Pole
+    [ 52678] = true, -- Jonathan's Fishing Pole
+    [ 84660] = true, -- Pandaren Fishing Pole
+    [ 84661] = true, -- Dragon Fishing Pole
+	[116825] = true, -- Savage Fishing Pole
+	[116826] = true, -- Draenic Fishing Pole
+	[118381] = true, -- Ephemeral Fishing Pole
+	[120163] = true, -- Thruk's Fishing Rod
 }
 
 local lures = {
     -- [Item Id] = { required skill, bonus, duration(m) }
-    [ 6529] = {   0,  25, 10 }, -- Shiny Bauble
-    [ 6530] = {  50,  50, 10 }, -- Nightcrawlers
-    [ 6532] = { 100,  75, 10 }, -- Bright Baubles
-    [ 6533] = { 100, 100, 10 }, -- Aquadynamic Fish Attractor
-    [ 6811] = {  50,  50, 10 }, -- Aquadynamic Fish Lens
-    [ 7307] = { 100,  75, 10 }, -- Flesh Eating Worm
-    [33820] = {   0,  75, 10 }, -- Weather-Beaten Fishing Hat
-    [34861] = { 100, 100, 10 }, -- Sharpened Fish Hook
-    [46006] = { 100, 100, 60 }, -- Glow Worm
-    [62673] = { 100, 100, 10 }, -- Feathered Lure
-    [68049] = { 250, 150, 15 }, -- Heat-Treated Spinning Lure
+    [  6529] = {   0,  25, 10 }, -- Shiny Bauble
+    [  6530] = {  50,  50, 10 }, -- Nightcrawlers
+    [  6532] = { 100,  75, 10 }, -- Bright Baubles
+    [  6533] = { 100, 100, 10 }, -- Aquadynamic Fish Attractor
+    [  6811] = {  50,  50, 10 }, -- Aquadynamic Fish Lens
+    [  7307] = { 100,  75, 10 }, -- Flesh Eating Worm
+    [ 33820] = {   0,  75, 10 }, -- Weather-Beaten Fishing Hat
+    [ 34861] = { 100, 100, 10 }, -- Sharpened Fish Hook
+    [ 46006] = { 100, 100, 60 }, -- Glow Worm
+    [ 62673] = { 100, 100, 10 }, -- Feathered Lure
+    [ 67404] = {   0,  15, 10 }, -- Glass Fishing Bobber
+    [ 68049] = { 250, 150, 15 }, -- Heat-Treated Spinning Lure
+	[ 88710] = {   0, 150, 10 }, -- Nat's Hat
+	[116825] = {   0, 200, 20 }, -- Savage Fishing Pole
+	[116826] = {   0, 200, 20 }, -- Draenic Fishing Pole
+	[117405] = {   0, 150, 10 }, -- Nat's Drinking Hat
+	
 }
 
 local db

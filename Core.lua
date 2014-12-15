@@ -68,7 +68,6 @@ local lures = {
 	[116825] = {   0, 200, 20 }, -- Savage Fishing Pole
 	[116826] = {   0, 200, 20 }, -- Draenic Fishing Pole
 	[117405] = {   0, 150, 10 }, -- Nat's Drinking Hat
-	
 }
 
 local db

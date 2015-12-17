@@ -44,10 +44,10 @@ local poles = {
     [ 52678] = true, -- Jonathan's Fishing Pole
     [ 84660] = true, -- Pandaren Fishing Pole
     [ 84661] = true, -- Dragon Fishing Pole
-	[116825] = true, -- Savage Fishing Pole
-	[116826] = true, -- Draenic Fishing Pole
-	[118381] = true, -- Ephemeral Fishing Pole
-	[120163] = true, -- Thruk's Fishing Rod
+    [116825] = true, -- Savage Fishing Pole
+    [116826] = true, -- Draenic Fishing Pole
+    [118381] = true, -- Ephemeral Fishing Pole
+    [120163] = true, -- Thruk's Fishing Rod
 }
 
 local lures = {
@@ -64,10 +64,12 @@ local lures = {
     [ 62673] = { 100, 100, 10 }, -- Feathered Lure
     [ 67404] = {   0,  15, 10 }, -- Glass Fishing Bobber
     [ 68049] = { 250, 150, 15 }, -- Heat-Treated Spinning Lure
-	[ 88710] = {   0, 150, 10 }, -- Nat's Hat
-	[116825] = {   0, 200, 20 }, -- Savage Fishing Pole
-	[116826] = {   0, 200, 20 }, -- Draenic Fishing Pole
-	[117405] = {   0, 150, 10 }, -- Nat's Drinking Hat
+    [ 88710] = {   0, 150, 10 }, -- Nat's Hat
+    [116825] = {   0, 200, 20 }, -- Savage Fishing Pole
+    [116826] = {   0, 200, 20 }, -- Draenic Fishing Pole
+    [117405] = {   0, 150, 10 }, -- Nat's Drinking Hat
+    [118391] = { 100, 200, 10 }, -- Worm Supreme
+    [124674] = {   0, 200, 10 }, -- Day-Old Darkmoon Doughnut
 }
 
 local db
@@ -122,7 +124,7 @@ button:SetPoint("TOP", UIParent, "BOTTOM", 0, -5)
 
 button:SetScript("PreClick", function(self)
 	if UnitCastingInfo("player") then
-		return 
+		return
 	end
 	if db.profile.autoLure and not GetWeaponEnchantInfo() then
 		local lure = GetBestLure()
@@ -193,7 +195,7 @@ frame:SetScript('OnShow', function(self)
 end)
 
 frame:SetScript('OnHide', function(self)
-	ClearOverrideBindings(frame)	
+	ClearOverrideBindings(frame)
 	for name, value in pairs(cvarBackup) do
 		SetCVar(name, value)
 	end
@@ -217,19 +219,19 @@ end
 
 local options
 local function GetOptions()
-	if not options then	
+	if not options then
 		options = {
 			name = 'ezFishing',
 			type = 'group',
 			set = function(info, value)
 				local shown = frame:IsShown()
-				if shown then 
-					frame:Hide() 
+				if shown then
+					frame:Hide()
 				end
 				db.profile[info[#info]] = value
-				if shown then 
-					frame:Show() 
-				end				
+				if shown then
+					frame:Show()
+				end
 			end,
 			get = function(info)
 				return db.profile[info[#info]]
@@ -254,7 +256,7 @@ local function GetOptions()
 		}
 	end
 	return options
-end	
+end
 
 --------------------------------------------------------------------------------
 -- Slash commands

@@ -1,10 +1,10 @@
 # ezFishing
 
-:fishing_pole_and_fish:  This is an addon for the MMORPG World of WarCraft.
+This is an addon for the MMORPG World of WarCraft.
 
 ## Description
 
-ezFishing adds a few automated quality-of-life features to the Fishing profession. To start using these features you simply equip a fishing rod.
+:fishing_pole_and_fish: ezFishing adds a few automated quality-of-life features to the Fishing profession. To start using these features you simply equip a fishing rod.
 
 ## Features
 

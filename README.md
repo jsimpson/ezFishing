@@ -1,9 +1,17 @@
 # ezFishing
 
-This is an addon for the MMORPG World of WarCraft.
+:fishing_pole_and_fish:  This is an addon for the MMORPG World of WarCraft.
 
 ## Description
 
-ezFishing is an addon to add a few quality-of-life features to the Fishing profession. It enables players to quickly apply a fishing lure to their rod, it will enable autoloot, and it will modify the in-game sound properties so that it is easy to hear the "bobber" effect.
+ezFishing adds a few automated quality-of-life features to the Fishing profession. To start using these features you simply equip a fishing rod.
 
-It has options for all of the above which can be accessed by typing '/ezfishing' or '/ezfish' in the chat window or through the Interface > AddOn panel.
+## Features
+
+* Double-click casting
+* Automatically apply any lures that it finds in a players inventory
+  * It applies the highest quality lure first
+* Enables autoloot (if it is not already enabled)
+* Automatic sound enhancement making it easy to hear the "bobber effect" when a fish is caught
+* Configuration and options panel in-game
+  * Accessible by typing '/ezfishing' or '/ezfish' in the chat window or through the Interface > AddOn panel

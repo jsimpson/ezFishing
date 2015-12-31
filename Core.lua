@@ -2,29 +2,31 @@
 -- Constants
 --------------------------------------------------------------------------------
 
-local defaults = { profile = {
-	autoLure = true,
-	autoLoot = true,
-	enhanceSounds = true,
-}}
+local defaults = {
+    profile = {
+        autoLure = true,
+        autoLoot = true,
+        enhanceSounds = true,
+    }
+}
 
 local fishingSkill = GetSpellInfo(7620)
 
 local mainHandSlot = 16
 
 local cvarOverrides = {
-	enhanceSounds = {
-		--Sound_MasterVolume = 1.0,
-		Sound_SFXVolume = 1.0,
-		Sound_MusicVolume = 0.0,
-		Sound_AmbienceVolume = 0.0,
-	},
-	always = {
-		autointeract = 0,
-	},
-	autoLoot = {
-		autoLootDefault = 1,
-	},
+    enhanceSounds = {
+        --Sound_MasterVolume = 1.0,
+        Sound_SFXVolume = 1.0,
+        Sound_MusicVolume = 0.0,
+        Sound_AmbienceVolume = 0.0,
+    },
+    always = {
+        autointeract = 0,
+    },
+    autoLoot = {
+        autoLootDefault = 1,
+    },
 }
 
 local poles = {
@@ -81,28 +83,23 @@ local db
 local function GetFishingSkill()
     local _, _, _, fishing, _, _ = GetProfessions()
     local name, _, rank, _, _, _, _, modifier = GetProfessionInfo(fishing)
-    if (not modifier) then
-        return rank
-    else
-        return rank + modifier
-    end
-    return 0
+    return (rank or 0) + (modifier or 0)
 end
 
 local function GetBestLure()
-	local skill, lure
-	local score = 0
-	for itemId, info in pairs(lures) do
-		if GetItemCount(itemId) > 0 then
-			local requiredSkill, bonus, duration = unpack(info)
-			local thisScore = bonus * duration
-			skill = skill or GetFishingSkill()
-			if skill >= requiredSkill and thisScore > score then
-				lure, score = itemId, thisScore
-			end
-		end
-	end
-	return lure
+    local skill, lure
+    local score = 0
+    for itemId, info in pairs(lures) do
+        if GetItemCount(itemId) > 0 then
+            local requiredSkill, bonus, duration = unpack(info)
+            local thisScore = bonus * duration
+            skill = skill or GetFishingSkill()
+            if skill >= requiredSkill and thisScore > score then
+                lure, score = itemId, thisScore
+            end
+        end
+    end
+    return lure
 end
 
 --------------------------------------------------------------------------------
@@ -123,49 +120,49 @@ button:RegisterForClicks("RightButtonUp")
 button:SetPoint("TOP", UIParent, "BOTTOM", 0, -5)
 
 button:SetScript("PreClick", function(self)
-	if UnitCastingInfo("player") then
-		return
-	end
-	if db.profile.autoLure and not GetWeaponEnchantInfo() then
-		local lure = GetBestLure()
-		if lure then
-			if GetItemCooldown(lure) == 0 then
-				self:SetAttribute("type", "item")
-				self:SetAttribute("item", "item:"..lure)
-				self:SetAttribute("target-slot", INVSLOT_MAINHAND)
-			end
-			return
-		end
-	end
-	local fishingMacroIndex = GetMacroIndexByName(fishingSkill)
-	if fishingMacroIndex ~= 0 then
-		self:SetAttribute("type", "macro")
-		self:SetAttribute("macro", fishingMacroIndex)
-	else
-		self:SetAttribute("type", "spell")
-		self:SetAttribute("spell", fishingSkill)
-	end
+    if UnitCastingInfo("player") then
+        return
+    end
+    if db.profile.autoLure and not GetWeaponEnchantInfo() then
+        local lure = GetBestLure()
+        if lure then
+            if GetItemCooldown(lure) == 0 then
+                self:SetAttribute("type", "item")
+                self:SetAttribute("item", "item:"..lure)
+                self:SetAttribute("target-slot", INVSLOT_MAINHAND)
+            end
+        return
+        end
+    end
+    local fishingMacroIndex = GetMacroIndexByName(fishingSkill)
+    if fishingMacroIndex ~= 0 then
+        self:SetAttribute("type", "macro")
+        self:SetAttribute("macro", fishingMacroIndex)
+    else
+        self:SetAttribute("type", "spell")
+        self:SetAttribute("spell", fishingSkill)
+    end
 end)
 
 button:SetScript("PostClick", function(self)
-	ClearOverrideBindings(frame)
-	self:SetAttribute("type", nil)
-	self:SetAttribute("item", nil)
-	self:SetAttribute("target-slot", nil)
-	self:SetAttribute("spell", nil)
-	self:SetAttribute("macro", nil)
+    ClearOverrideBindings(frame)
+    self:SetAttribute("type", nil)
+    self:SetAttribute("item", nil)
+    self:SetAttribute("target-slot", nil)
+    self:SetAttribute("spell", nil)
+    self:SetAttribute("macro", nil)
 end)
 
 local lastClickTime = 0
 local function OnMouseDown_Hook(_, button)
-	if frame:IsShown() and button == "RightButton" then
-		local now = GetTime()
-		local delay = now - lastClickTime
-		lastClickTime = now
-		if delay < 0.4 then
-			SetOverrideBindingClick(frame, true, "BUTTON2", "ezFishingButton")
-		end
-	end
+    if frame:IsShown() and button == "RightButton" then
+        local now = GetTime()
+        local delay = now - lastClickTime
+        lastClickTime = now
+        if delay < 0.4 then
+            SetOverrideBindingClick(frame, true, "BUTTON2", "ezFishingButton")
+        end
+    end
 end
 
 --------------------------------------------------------------------------------
@@ -175,42 +172,42 @@ end
 local cvarBackup = {}
 
 local function OverrideCVars(values)
-	for name, value in pairs(values) do
-		local currentValue = tonumber(GetCVar(name))
-		if currentValue ~= value then
-			cvarBackup[name] = currentValue
-			SetCVar(name, value)
-		end
-	end
+    for name, value in pairs(values) do
+        local currentValue = tonumber(GetCVar(name))
+        if currentValue ~= value then
+            cvarBackup[name] = currentValue
+            SetCVar(name, value)
+        end
+    end
 end
 
 frame:SetScript('OnShow', function(self)
-	OverrideCVars(cvarOverrides.always)
-	if db.profile.autoLoot then
-		OverrideCVars(cvarOverrides.autoLoot)
-	end
-	if db.profile.enhanceSounds then
-		OverrideCVars(cvarOverrides.enhanceSounds)
-	end
+    OverrideCVars(cvarOverrides.always)
+    if db.profile.autoLoot then
+        OverrideCVars(cvarOverrides.autoLoot)
+    end
+    if db.profile.enhanceSounds then
+        OverrideCVars(cvarOverrides.enhanceSounds)
+    end
 end)
 
 frame:SetScript('OnHide', function(self)
-	ClearOverrideBindings(frame)
-	for name, value in pairs(cvarBackup) do
-		SetCVar(name, value)
-	end
-	wipe(cvarBackup)
+  ClearOverrideBindings(frame)
+  for name, value in pairs(cvarBackup) do
+      SetCVar(name, value)
+  end
+  wipe(cvarBackup)
 end)
 
 function frame:CheckActivation()
-	if not InCombatLockdown() then
-		local mainHandId = tonumber(GetInventoryItemID("player", INVSLOT_MAINHAND) or nil)
-		if mainHandId and poles[mainHandId] then
-			self:Show()
-			return
-		end
-	end
-	self:Hide()
+    if not InCombatLockdown() then
+        local mainHandId = tonumber(GetInventoryItemID("player", INVSLOT_MAINHAND) or nil)
+        if mainHandId and poles[mainHandId] then
+            self:Show()
+            return
+        end
+    end
+    self:Hide()
 end
 
 --------------------------------------------------------------------------------
@@ -219,43 +216,43 @@ end
 
 local options
 local function GetOptions()
-	if not options then
-		options = {
-			name = 'ezFishing',
-			type = 'group',
-			set = function(info, value)
-				local shown = frame:IsShown()
-				if shown then
-					frame:Hide()
-				end
-				db.profile[info[#info]] = value
-				if shown then
-					frame:Show()
-				end
-			end,
-			get = function(info)
-				return db.profile[info[#info]]
-			end,
-			args = {
-				autoLure = {
-					name = 'Apply lure',
-					desc = 'Automatically apply a lure when need be.',
-					type = 'toggle',
-				},
-				autoLoot = {
-					name = 'Autoloot',
-					desc = 'Enable autolooting when a fishing pole is equipped.',
-					type = 'toggle',
-				},
-				enhanceSounds = {
-					name = 'Enhanced sounds',
-					desc = 'Change sound settings to ease fishing when a fishing pole is equipped.',
-					type = 'toggle',
-				},
-			}
-		}
-	end
-	return options
+    if not options then
+        options = {
+        name = 'ezFishing',
+        type = 'group',
+        set = function(info, value)
+            local shown = frame:IsShown()
+            if shown then
+                frame:Hide()
+            end
+            db.profile[info[#info]] = value
+            if shown then
+                frame:Show()
+            end
+        end,
+        get = function(info)
+            return db.profile[info[#info]]
+        end,
+        args = {
+            autoLure = {
+                name = 'Apply lure',
+                desc = 'Automatically apply a lure when need be.',
+                type = 'toggle',
+            },
+            autoLoot = {
+                name = 'Autoloot',
+                desc = 'Enable autolooting when a fishing pole is equipped.',
+                type = 'toggle',
+            },
+            enhanceSounds = {
+                name = 'Enhanced sounds',
+                desc = 'Change sound settings to ease fishing when a fishing pole is equipped.',
+                type = 'toggle',
+            },
+        }
+    }
+    end
+    return options
 end
 
 --------------------------------------------------------------------------------
@@ -273,33 +270,31 @@ SLASH_EZFISHING2 = "/ezfish"
 --------------------------------------------------------------------------------
 
 frame:SetScript('OnEvent', function(self, event, ...)
-	if type(self[event]) == "function" then
-		return self[event](self, event, ...)
---@debug@
-	else
-		print("ezFishing: no handler for ", event)
---@end-debug@
-	end
+    if type(self[event]) == "function" then
+        return self[event](self, event, ...)
+    else
+        print("ezFishing: no handler for ", event)
+    end
 end)
 
 function frame:UNIT_INVENTORY_CHANGED(_, unit)
-	if unit == 'player' then
-		self:CheckActivation()
-	end
+    if unit == 'player' then
+        self:CheckActivation()
+    end
 end
 
 function frame:ADDON_LOADED(_, addon)
-	if addon:lower() ~= "ezfishing" then return end
-	self:UnregisterEvent('ADDON_LOADED')
-	if LibStub and LibStub("AceDB-3.0", true) and LibStub("AceConfigDialog-3.0", true) then
-		db = LibStub('AceDB-3.0'):New('ezFishingDB', defaults, true)
-		LibStub("AceConfig-3.0"):RegisterOptionsTable('ezFishing', GetOptions)
-		LibStub("AceConfigDialog-3.0"):AddToBlizOptions('ezFishing', 'ezFishing')
-	else
-		db = defaults
-	end
-	WorldFrame:HookScript('OnMouseDown', OnMouseDown_Hook)
-	self:CheckActivation()
+    if addon:lower() ~= "ezfishing" then return end
+    self:UnregisterEvent('ADDON_LOADED')
+    if LibStub and LibStub("AceDB-3.0", true) and LibStub("AceConfigDialog-3.0", true) then
+        db = LibStub('AceDB-3.0'):New('ezFishingDB', defaults, true)
+        LibStub("AceConfig-3.0"):RegisterOptionsTable('ezFishing', GetOptions)
+        LibStub("AceConfigDialog-3.0"):AddToBlizOptions('ezFishing', 'ezFishing')
+    else
+        db = defaults
+    end
+    WorldFrame:HookScript('OnMouseDown', OnMouseDown_Hook)
+    self:CheckActivation()
 end
 
 frame.PLAYER_LOGOUT = frame.Hide

@@ -4,7 +4,7 @@ This is an addon for the MMORPG World of WarCraft.
 
 ## Description
 
-:fishing_pole_and_fish: ezFishing adds a few automated quality-of-life features to the Fishing profession. To start using these features you simply equip a fishing rod.
+:fishing_pole_and_fish: ezFishing adds a few automated quality-of-life features to the Fishing profession. To start using these features you simply equip a fishing rod. Most importantly, this addon adds double-click casting support. Double-click casting is precisely what you would think: If you double-click, with a fishing rod equipped, it will perform a cast. This greatly simplifies having to add the vanilla Fishing button to your action bars and removes some of the worst tedium from the profession.
 
 ## Features
 

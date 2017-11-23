@@ -50,6 +50,7 @@ local poles = {
     [116826] = true, -- Draenic Fishing Pole
     [118381] = true, -- Ephemeral Fishing Pole
     [120163] = true, -- Thruk's Fishing Rod
+    [133755] = true, -- Underlight Angler
 }
 
 local lures = {

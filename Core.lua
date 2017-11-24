@@ -4,6 +4,7 @@
 
 local defaults = {
     profile = {
+        autoArcaneLure = true,
         autoLure = true,
         autoLoot = true,
         enhanceSounds = true,
@@ -75,11 +76,17 @@ local lures = {
     [124674] = {   0, 200, 10 }, -- Day-Old Darkmoon Doughnut
 }
 
+local arcaneLureItemId = 139175
+
 local db
 
 --------------------------------------------------------------------------------
 -- Lure handling
 --------------------------------------------------------------------------------
+local function HasArcaneLureBuff()
+  local _, _, _, _, _, _, _, _, _, _, spellId, _, _, _, _, _, _, _ = UnitBuff("player", "Arcane Lure")
+  return spellId ~= nil
+end
 
 local function GetFishingSkill()
     local _, _, _, fishing, _, _ = GetProfessions()
@@ -124,6 +131,15 @@ button:SetScript("PreClick", function(self)
     if UnitCastingInfo("player") then
         return
     end
+
+    if db.profile.autoArcaneLure and not HasArcaneLureBuff() then
+        if GetItemCount(arcaneLureItemId) > 0 then
+          self:SetAttribute("type", "item")
+          self:SetAttribute("item", "item:"..arcaneLureItemId)
+        end
+        return
+    end
+
     if db.profile.autoLure and not GetWeaponEnchantInfo() then
         local lure = GetBestLure()
         if lure then
@@ -132,9 +148,10 @@ button:SetScript("PreClick", function(self)
                 self:SetAttribute("item", "item:"..lure)
                 self:SetAttribute("target-slot", INVSLOT_MAINHAND)
             end
-        return
+            return
         end
     end
+
     local fishingMacroIndex = GetMacroIndexByName(fishingSkill)
     if fishingMacroIndex ~= 0 then
         self:SetAttribute("type", "macro")
@@ -235,6 +252,11 @@ local function GetOptions()
             return db.profile[info[#info]]
         end,
         args = {
+            autoArcaneLure = {
+                name = 'Apply arcane lure',
+                desc = 'Automatically apply an arcane lure when need be.',
+                type = 'toggle',
+            },
             autoLure = {
                 name = 'Apply lure',
                 desc = 'Automatically apply a lure when need be.',

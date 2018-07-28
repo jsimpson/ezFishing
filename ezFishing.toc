@@ -1,9 +1,9 @@
-## Interface: 60000
+## Interface: 80000
 
 ## Title: ezFishing
 ## Notes: Fishing made easier.
 ## Author: Adirelle
-## Version: @project-version@ 
+## Version: @project-version@
 ## X-Date: @project-date-iso@
 ## LoadManagers: AddonLoader
 ## X-LoadOn-Always: delayed

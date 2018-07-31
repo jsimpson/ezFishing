@@ -9,14 +9,15 @@ local config = {
     enhanceSounds  = true,
 }
 
-local fishingSkill = GetSpellInfo(7620)
-local mainHandSlot = 16
+local fishingSkill     = GetSpellInfo(7620)
+local mainHandSlot     = 16
+local arcaneLureItemId = 139175
 
 local cvarOverrides = {
     enhanceSounds = {
-        --Sound_MasterVolume = 1.0,
-        Sound_SFXVolume = 1.0,
-        Sound_MusicVolume = 0.0,
+        Sound_MasterVolume   = 1.0,
+        Sound_SFXVolume      = 1.0,
+        Sound_MusicVolume    = 0.0,
         Sound_AmbienceVolume = 0.0,
     },
     always = {
@@ -73,27 +74,16 @@ local lures = {
     [124674] = {   0, 200, 10 }, -- Day-Old Darkmoon Doughnut
 }
 
-local arcaneLureItemId = 139175
-
-local db
-
 --------------------------------------------------------------------------------
 -- Lure handling
 --------------------------------------------------------------------------------
 
 function BuffSearch(target, spellName)
     for i = 1, 40 do
-        local name, _, count, _, duration, expirationTime = UnitBuff(target, i);
-        if name and name == spellName then
-            return true
-        end
+        local name, _, _, _, _, _ = UnitBuff(target, i);
+        if name and name == spellName then return true end
     end
     return false
-end
-
-local function HasArcaneLureBuff()
-  local _, _, _, _, _, _, _, _, _, _, spellId, _, _, _, _, _, _, _ = UnitBuff("player", "Arcane Lure")
-  return false --spellId ~= nil
 end
 
 local function GetFishingSkill()
@@ -257,13 +247,6 @@ end
 function frame:ADDON_LOADED(_, addon)
     if addon:lower() ~= "ezfishing" then return end
     self:UnregisterEvent('ADDON_LOADED')
-    if LibStub and LibStub("AceDB-3.0", true) and LibStub("AceConfigDialog-3.0", true) then
-        db = LibStub('AceDB-3.0'):New('ezFishingDB', defaults, true)
-        LibStub("AceConfig-3.0"):RegisterOptionsTable('ezFishing', GetOptions)
-        LibStub("AceConfigDialog-3.0"):AddToBlizOptions('ezFishing', 'ezFishing')
-    else
-        db = defaults
-    end
     WorldFrame:HookScript('OnMouseDown', OnMouseDown_Hook)
     self:CheckActivation()
 end

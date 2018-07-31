@@ -2,17 +2,14 @@
 -- Constants
 --------------------------------------------------------------------------------
 
-local defaults = {
-    profile = {
-        autoArcaneLure = true,
-        autoLure = true,
-        autoLoot = true,
-        enhanceSounds = true,
-    }
+local config = {
+    autoArcaneLure = true,
+    autoLure       = true,
+    autoLoot       = true,
+    enhanceSounds  = true,
 }
 
 local fishingSkill = GetSpellInfo(7620)
-
 local mainHandSlot = 16
 
 local cvarOverrides = {
@@ -83,9 +80,20 @@ local db
 --------------------------------------------------------------------------------
 -- Lure handling
 --------------------------------------------------------------------------------
+
+function BuffSearch(target, spellName)
+    for i = 1, 40 do
+        local name, _, count, _, duration, expirationTime = UnitBuff(target, i);
+        if name and name == spellName then
+            return true
+        end
+    end
+    return false
+end
+
 local function HasArcaneLureBuff()
   local _, _, _, _, _, _, _, _, _, _, spellId, _, _, _, _, _, _, _ = UnitBuff("player", "Arcane Lure")
-  return spellId ~= nil
+  return false --spellId ~= nil
 end
 
 local function GetFishingSkill()
@@ -132,7 +140,7 @@ button:SetScript("PreClick", function(self)
         return
     end
 
-    if db.profile.autoArcaneLure and not HasArcaneLureBuff() then
+    if config.autoArcaneLure and not BuffSearch("player", "Arcane Lure") then
         if GetItemCount(arcaneLureItemId) > 0 then
           self:SetAttribute("type", "item")
           self:SetAttribute("item", "item:"..arcaneLureItemId)
@@ -140,7 +148,7 @@ button:SetScript("PreClick", function(self)
         return
     end
 
-    if db.profile.autoLure and not GetWeaponEnchantInfo() then
+    if config.autoLure and not GetWeaponEnchantInfo() then
         local lure = GetBestLure()
         if lure then
             if GetItemCooldown(lure) == 0 then
@@ -201,10 +209,10 @@ end
 
 frame:SetScript('OnShow', function(self)
     OverrideCVars(cvarOverrides.always)
-    if db.profile.autoLoot then
+    if config.autoLoot then
         OverrideCVars(cvarOverrides.autoLoot)
     end
-    if db.profile.enhanceSounds then
+    if config.enhanceSounds then
         OverrideCVars(cvarOverrides.enhanceSounds)
     end
 end)
@@ -227,66 +235,6 @@ function frame:CheckActivation()
     end
     self:Hide()
 end
-
---------------------------------------------------------------------------------
--- Option handling
---------------------------------------------------------------------------------
-
-local options
-local function GetOptions()
-    if not options then
-        options = {
-        name = 'ezFishing',
-        type = 'group',
-        set = function(info, value)
-            local shown = frame:IsShown()
-            if shown then
-                frame:Hide()
-            end
-            db.profile[info[#info]] = value
-            if shown then
-                frame:Show()
-            end
-        end,
-        get = function(info)
-            return db.profile[info[#info]]
-        end,
-        args = {
-            autoArcaneLure = {
-                name = 'Apply arcane lure',
-                desc = 'Automatically apply an arcane lure when need be.',
-                type = 'toggle',
-            },
-            autoLure = {
-                name = 'Apply lure',
-                desc = 'Automatically apply a lure when need be.',
-                type = 'toggle',
-            },
-            autoLoot = {
-                name = 'Autoloot',
-                desc = 'Enable autolooting when a fishing pole is equipped.',
-                type = 'toggle',
-            },
-            enhanceSounds = {
-                name = 'Enhanced sounds',
-                desc = 'Change sound settings to ease fishing when a fishing pole is equipped.',
-                type = 'toggle',
-            },
-        }
-    }
-    end
-    return options
-end
-
---------------------------------------------------------------------------------
--- Slash commands
---------------------------------------------------------------------------------
-
-SlashCmdList["EZFISHING"] = function()
-    InterfaceOptionsFrame_OpenToCategory("ezFishing")
-end
-SLASH_EZFISHING1 = "/ezfishing"
-SLASH_EZFISHING2 = "/ezfish"
 
 --------------------------------------------------------------------------------
 -- Event handling

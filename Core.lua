@@ -126,16 +126,11 @@ button:RegisterForClicks("RightButtonUp")
 button:SetPoint("TOP", UIParent, "BOTTOM", 0, -5)
 
 button:SetScript("PreClick", function(self)
-    if UnitCastingInfo("player") then
-        return
-    end
-
     if config.autoArcaneLure and not BuffSearch("player", "Arcane Lure") then
         if GetItemCount(arcaneLureItemId) > 0 then
           self:SetAttribute("type", "item")
           self:SetAttribute("item", "item:"..arcaneLureItemId)
         end
-        return
     end
 
     if config.autoLure and not GetWeaponEnchantInfo() then
@@ -146,7 +141,6 @@ button:SetScript("PreClick", function(self)
                 self:SetAttribute("item", "item:"..lure)
                 self:SetAttribute("target-slot", INVSLOT_MAINHAND)
             end
-            return
         end
     end
 

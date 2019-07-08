@@ -54,24 +54,24 @@ local poles = {
 
 local lures = {
     -- [Item Id] = { required skill, bonus, duration(m) }
-    [  6529] = {   0,  25, 10 }, -- Shiny Bauble
-    [  6530] = {  50,  50, 10 }, -- Nightcrawlers
-    [  6532] = { 100,  75, 10 }, -- Bright Baubles
-    [  6533] = { 100, 100, 10 }, -- Aquadynamic Fish Attractor
-    [  6811] = {  50,  50, 10 }, -- Aquadynamic Fish Lens
-    [  7307] = { 100,  75, 10 }, -- Flesh Eating Worm
-    [ 33820] = {   0,  75, 10 }, -- Weather-Beaten Fishing Hat
-    [ 34861] = { 100, 100, 10 }, -- Sharpened Fish Hook
-    [ 46006] = { 100, 100, 60 }, -- Glow Worm
-    [ 62673] = { 100, 100, 10 }, -- Feathered Lure
-    [ 67404] = {   0,  15, 10 }, -- Glass Fishing Bobber
-    [ 68049] = { 250, 150, 15 }, -- Heat-Treated Spinning Lure
-    [ 88710] = {   0, 150, 10 }, -- Nat's Hat
-    [116825] = {   0, 200, 20 }, -- Savage Fishing Pole
-    [116826] = {   0, 200, 20 }, -- Draenic Fishing Pole
-    [117405] = {   0, 150, 10 }, -- Nat's Drinking Hat
-    [118391] = { 100, 200, 10 }, -- Worm Supreme
-    [124674] = {   0, 200, 10 }, -- Day-Old Darkmoon Doughnut
+    [  6529] = {   0,   3, 10 }, -- Shiny Bauble
+    [  6530] = {  50,   5, 10 }, -- Nightcrawlers
+    [  6532] = { 100,   7, 10 }, -- Bright Baubles
+    [  6533] = { 100,   9, 10 }, -- Aquadynamic Fish Attractor
+    [  6811] = {  50,   5, 10 }, -- Aquadynamic Fish Lens
+    [  7307] = { 100,   7, 10 }, -- Flesh Eating Worm
+    [ 33820] = {   0,   7, 10 }, -- Weather-Beaten Fishing Hat
+    [ 34861] = {   1,   9, 10 }, -- Sharpened Fish Hook
+    [ 46006] = {   1,   9, 60 }, -- Glow Worm
+    [ 62673] = {  75,   9, 10 }, -- Feathered Lure
+    [ 67404] = {   0,   2, 10 }, -- Glass Fishing Bobber
+    [ 68049] = {   1,  10, 15 }, -- Heat-Treated Spinning Lure
+    [ 88710] = {   0,  10, 10 }, -- Nat's Hat
+    [116825] = {   0,  10, 10 }, -- Savage Fishing Pole
+    [116826] = {   0,  10, 10 }, -- Draenic Fishing Pole
+    [117405] = {   0,  10, 10 }, -- Nat's Drinking Hat
+    [118391] = { 100,  10, 10 }, -- Worm Supreme
+    [124674] = {   1,  10, 10 }, -- Day-Old Darkmoon Doughnut
 }
 
 --------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 # ezFishing
 
-This is an addon for the MMORPG World of WarCraft.
+This is an addon for the MMORPG World of Warcraft.
 
 ## Description
 
@@ -11,6 +11,7 @@ This is an addon for the MMORPG World of WarCraft.
 * Double-click casting
 * Automatically apply any lures that it finds in a players inventory
   * It applies the highest quality lure first
+* Automatically apply arcane lures
 * Enables autoloot (if it is not already enabled)
 * Automatic sound enhancement making it easy to hear the "bobber effect" when a fish is caught
 * Configuration and options panel in-game

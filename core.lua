@@ -50,6 +50,10 @@ local poles = {
     [118381] = true, -- Ephemeral Fishing Pole
     [120163] = true, -- Thruk's Fishing Rod
     [133755] = true, -- Underlight Angler
+    [168804] = true, -- Powered Piscine Procurement Pole
+    [173044] = true, -- Wreathed Fishing Pole
+    [177030] = true, -- Aquatic Extractor
+    [180136] = true, -- The Brokers Angle'r
 }
 
 local lures = {

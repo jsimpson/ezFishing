@@ -130,9 +130,9 @@ button:SetScript("PreClick", function(self)
 
     if config.autoArcaneLure and not BuffSearch("player", "Arcane Lure") then
         if GetItemCount(arcaneLureItemId) > 0 then
-          self:SetAttribute("type", "item")
-          self:SetAttribute("item", "item:"..arcaneLureItemId)
-          return
+            self:SetAttribute("type", "item")
+            self:SetAttribute("item", "item:"..arcaneLureItemId)
+            return
         end
     end
 
@@ -206,11 +206,11 @@ frame:SetScript('OnShow', function(self)
 end)
 
 frame:SetScript('OnHide', function(self)
-  ClearOverrideBindings(frame)
-  for name, value in pairs(cvarBackup) do
-      SetCVar(name, value)
-  end
-  wipe(cvarBackup)
+    ClearOverrideBindings(frame)
+    for name, value in pairs(cvarBackup) do
+        SetCVar(name, value)
+    end
+    wipe(cvarBackup)
 end)
 
 function frame:CheckActivation()

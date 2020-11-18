@@ -6,4 +6,4 @@
 ## Version: @project-version@
 ## SavedVariables: ezFishingDB
 
-Core.lua
+core.lua

@@ -14,5 +14,4 @@ This is an addon for the MMORPG World of Warcraft.
 * Automatically apply arcane lures
 * Enables autoloot (if it is not already enabled)
 * Automatic sound enhancement making it easy to hear the "bobber effect" when a fish is caught
-* Configuration and options panel in-game
-  * Accessible by typing '/ezfishing' or '/ezfish' in the chat window or through the Interface > AddOn panel
+* Configuration options accessible by editing `core.lua`.
